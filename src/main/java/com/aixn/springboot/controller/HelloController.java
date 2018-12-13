@@ -21,7 +21,6 @@ public class HelloController {
     @RequestMapping("/hello")
     private String sayHello() {
         UserDO userDO = userDOMapper.selectByPrimaryKey(1);
-        int a=1/0;
         if(userDO == null){
             return "用户不存在";
         }else {
