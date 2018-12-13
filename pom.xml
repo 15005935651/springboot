@@ -76,6 +76,14 @@
             <version>5.2.4.Final</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -117,7 +125,7 @@
                     <!--允许移动生成的文件-->
                     <verbose>true</verbose>
                     <!--允许自动覆盖文件-->
-                    <overwrite>true</overwrite>
+                    <overwrite>false</overwrite>
                     <configurationFile>
                         src/main/resources/mybatis-generator.xml
                     </configurationFile>
