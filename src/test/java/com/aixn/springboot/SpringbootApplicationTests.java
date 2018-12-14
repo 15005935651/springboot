@@ -1,6 +1,8 @@
 package com.aixn.springboot;
 
 import com.aixn.springboot.controller.viewobject.ItemVO;
+import com.aixn.springboot.dao.ItemStockDoMapper;
+import com.aixn.springboot.dataobject.ItemStockDo;
 import com.aixn.springboot.response.CommonReturnType;
 import com.aixn.springboot.service.ItemService;
 import com.aixn.springboot.service.model.ItemModel;
@@ -20,9 +22,19 @@ public class SpringbootApplicationTests {
     public void contextLoads() {
     }
 
+    @Autowired
+    private ItemStockDoMapper itemStockDoMapper;
+
     @Test
     public void go(){
-        getItem(1);
+
+        ItemStockDo itemStockDo = itemStockDoMapper.selectByItemId(2);
+        if(itemStockDo==null){
+            System.out.println("null");
+
+        }else {
+            System.out.println("not null");
+        }
 
     }
 

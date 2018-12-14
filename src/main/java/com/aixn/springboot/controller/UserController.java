@@ -93,16 +93,16 @@ public class UserController extends BaseController{
      * @param age 年龄
      * @param password 密码
      * @return 注册成功
-     * @throws BusinessException
+     * @throws BusinessException 自定义异常
      */
     @RequestMapping("/register")
     @ResponseBody
-    public CommonReturnType registr(@RequestParam(name="telephone")String telephone,
-                                    @RequestParam(name="otpCode")String optCode,
-                                    @RequestParam(name="name")String name,
-                                    @RequestParam(name="gender")Byte gender,
-                                    @RequestParam(name="age")Integer age,
-                                    @RequestParam(name="password")String password) throws BusinessException, UnsupportedEncodingException, NoSuchAlgorithmException {
+    public CommonReturnType register(@RequestParam(name="telephone")String telephone,
+                                     @RequestParam(name="otpCode")String optCode,
+                                     @RequestParam(name="name")String name,
+                                     @RequestParam(name="gender")Byte gender,
+                                     @RequestParam(name="age")Integer age,
+                                     @RequestParam(name="password")String password) throws BusinessException, UnsupportedEncodingException, NoSuchAlgorithmException {
         //验证手机号和对应的验证码相符
         String inSessionOtp = (String)this.httpServletRequest.getSession().getAttribute(telephone);
         if(!com.alibaba.druid.util.StringUtils.equals(optCode,inSessionOtp)){
@@ -138,8 +138,9 @@ public class UserController extends BaseController{
         //将登录凭证加入的用户登录session中
         this.httpServletRequest.getSession().setAttribute("IS_LOGIN",true);
         this.httpServletRequest.getSession().setAttribute("LOGIN_USER",userModel);
+        String msg = "登录成功";
         System.out.println("登录成功");
-        return CommonReturnType.create(null);
+        return CommonReturnType.create(msg);
     }
 
 
@@ -156,8 +157,7 @@ public class UserController extends BaseController{
         MessageDigest md5 = MessageDigest.getInstance("MD5");
         BASE64Encoder base64Encoder = new BASE64Encoder();
         //加密字符串
-        String newStr = base64Encoder.encode(md5.digest(password.getBytes("utf-8")));
-        return newStr;
+        return base64Encoder.encode(md5.digest(password.getBytes("utf-8")));
 
     }
 
