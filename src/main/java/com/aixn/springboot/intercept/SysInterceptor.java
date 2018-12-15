@@ -25,7 +25,6 @@ public class SysInterceptor extends HandlerInterceptorAdapter {
         }
         return true;
     }
-
     //    试图渲染之后执行
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
