@@ -23,8 +23,6 @@ public class SysInterceptor extends HandlerInterceptorAdapter {
         if(isLogin==null||!isLogin){
             throw new BusinessException(EmBusinessError.USER_NOT_LOGIN);
         }
-
-
         return true;
     }
 
