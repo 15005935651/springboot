@@ -43,7 +43,7 @@ public class OrderController extends BaseController {
                                   @RequestParam(name="amount")Integer amount) throws BusinessException {
         Boolean isLogin = (Boolean)httpServletRequest.getSession().getAttribute("IS_LOGIN");
 
-        if(isLogin==null||!isLogin.booleanValue() ){
+        if(isLogin==null||!isLogin){
             throw new BusinessException(EmBusinessError.USER_NOT_LOGIN);
         }
 

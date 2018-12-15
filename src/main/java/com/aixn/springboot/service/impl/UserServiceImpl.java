@@ -8,6 +8,8 @@ import com.aixn.springboot.error.BusinessException;
 import com.aixn.springboot.error.EmBusinessError;
 import com.aixn.springboot.service.UserService;
 import com.aixn.springboot.service.model.UserModel;
+import com.aixn.springboot.validator.ValidationResult;
+import com.aixn.springboot.validator.ValidatorImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class UserServiceImpl implements UserService {
     private UserDOMapper userDOMapper;
     @Autowired
     private UserPasswordDOMapper userPasswordDOMapper;
+
+    @Autowired
+    private ValidatorImpl validator;
 
     @Override
     public UserModel getUserById(Integer id) {
@@ -51,9 +56,14 @@ public class UserServiceImpl implements UserService {
         if (userModel == null) {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        if (StringUtils.isEmpty(userModel.getName()) || userModel.getAge() == null
-                || userModel.getGender() == null || StringUtils.isEmpty(userModel.getTelephone())) {
-            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
+//        if (StringUtils.isEmpty(userModel.getName()) || userModel.getAge() == null
+//                || userModel.getGender() == null || StringUtils.isEmpty(userModel.getTelephone())) {
+//            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
+//        }
+        //入参校验
+        ValidationResult result = validator.validate(userModel);
+        if(result.isHasErrors()){
+            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR,result.getErrMsg());
         }
         //实现object->model
         UserDO userDO = convertFromModel(userModel);

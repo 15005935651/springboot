@@ -138,9 +138,9 @@ public class UserController extends BaseController{
         //将登录凭证加入的用户登录session中
         this.httpServletRequest.getSession().setAttribute("IS_LOGIN",true);
         this.httpServletRequest.getSession().setAttribute("LOGIN_USER",userModel);
-        String msg = "登录成功";
+
         System.out.println("登录成功");
-        return CommonReturnType.create(msg);
+        return CommonReturnType.create(null);
     }
 
 

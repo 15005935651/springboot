@@ -86,7 +86,7 @@ public class ItemController extends BaseController {
      *
      * @return 商品列表
      */
-    @RequestMapping("/list")
+    @RequestMapping(value = "/list")
     @ResponseBody
     public CommonReturnType listItem() {
         List<ItemModel> list = itemService.listItem();
