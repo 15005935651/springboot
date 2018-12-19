@@ -24,7 +24,7 @@ public class ExceptionHandler {
      */
     @org.springframework.web.bind.annotation.ExceptionHandler(value = Exception.class)
     public Object errorHandle(HttpServletRequest httpServletRequest
-            , Exception e) throws Exception{
+            , Exception e) {
         e.printStackTrace();
         ModelAndView mav = new ModelAndView();
         mav.addObject("Exception",e);

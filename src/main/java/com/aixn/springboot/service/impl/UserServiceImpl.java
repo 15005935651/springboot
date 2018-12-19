@@ -88,7 +88,6 @@ public class UserServiceImpl implements UserService {
     public UserModel validateLogin(String telephone, String encryptPassword) throws BusinessException {
         //通过用户手机获取用户信息
         UserDO userDO = userDOMapper.selectByTelephone(telephone);
-        System.out.println(userDO.getName());
         if (userDO == null) {
             throw new BusinessException(EmBusinessError.USER_LOGIN_FAIL);
         }

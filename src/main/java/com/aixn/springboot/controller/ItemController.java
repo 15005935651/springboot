@@ -10,6 +10,7 @@ import com.aixn.springboot.service.model.ItemModel;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
 
 @Controller("item")
 @RequestMapping("/item")
+@CrossOrigin(allowCredentials = "true",allowedHeaders = "*")
 public class ItemController extends BaseController {
 
     @Autowired

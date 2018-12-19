@@ -10,10 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import sun.misc.BASE64Encoder;
 
 import javax.servlet.http.HttpServletRequest;
@@ -65,7 +62,7 @@ public class UserController extends BaseController{
      * @param telephone 用户电话号码
      * @return 验证成功
      */
-    @RequestMapping("/getOTP")
+    @RequestMapping(value = "/getOtp",method = {RequestMethod.POST},consumes = CONTENT_TYPE_FORMED)
     @ResponseBody
     public CommonReturnType getOTP(@RequestParam(name="telephone")String telephone){
         //根据一定规则生成OTP验证码
@@ -95,7 +92,7 @@ public class UserController extends BaseController{
      * @return 注册成功
      * @throws BusinessException 自定义异常
      */
-    @RequestMapping("/register")
+    @RequestMapping(value = "/register",method = {RequestMethod.POST},consumes = CONTENT_TYPE_FORMED)
     @ResponseBody
     public CommonReturnType register(@RequestParam(name="telephone")String telephone,
                                      @RequestParam(name="otpCode")String optCode,
@@ -119,12 +116,12 @@ public class UserController extends BaseController{
         userModel.setEncrptPassword(this.encodeByMd5(password));
 
         userService.register(userModel);
-        System.out.println("注册成功");
-        return CommonReturnType.create(null);
+        String newStr = "注册成功";
+        return CommonReturnType.create(newStr);
 
     }
 
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login",method = {RequestMethod.POST},consumes = CONTENT_TYPE_FORMED)
     @ResponseBody
     public CommonReturnType login(@RequestParam(name="telephone")String telephone,
                                    @RequestParam(name="password")String password) throws BusinessException, UnsupportedEncodingException, NoSuchAlgorithmException {
@@ -138,7 +135,6 @@ public class UserController extends BaseController{
         //将登录凭证加入的用户登录session中
         this.httpServletRequest.getSession().setAttribute("IS_LOGIN",true);
         this.httpServletRequest.getSession().setAttribute("LOGIN_USER",userModel);
-
         System.out.println("登录成功");
         return CommonReturnType.create(null);
     }

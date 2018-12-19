@@ -10,8 +10,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @Configuration
 public class SessionConfiguration extends WebMvcConfigurerAdapter {
+    /**
+     * 拦截所有请求，验证是否登录
+     * @param registry
+     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new SysInterceptor()).addPathPatterns("/item/**");
+        //registry.addInterceptor(new SysInterceptor()).excludePathPatterns("/user/**").addPathPatterns("/**");
     }
 }

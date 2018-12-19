@@ -17,6 +17,9 @@ import java.util.Map;
  * @date 2018/12/13 12:33
  */
 public class BaseController {
+
+    public static final String CONTENT_TYPE_FORMED="application/x-www-form-urlencoded";
+
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
